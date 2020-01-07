@@ -1,0 +1,1 @@
+# react-sequelize-template
