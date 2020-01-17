@@ -18,12 +18,14 @@ router.post('/signup', (req, res) => {
     email: req.body.email,
     password: req.body.password,
   })
-    .then(() => {
-      res.redirect(307, '/login');
+    .then((dbResponse) => {
+      // res.redirect(307, '/login');
+      res.json(dbResponse);
     })
     .catch((err) => {
       res.status(401).json(err);
     });
+  // res.json('signup route');
 });
 
 // Route for logging user out

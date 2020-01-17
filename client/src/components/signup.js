@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import Axios from 'axios';
 
-const Signup = () => {
+const Signup = props => {
     const emptyUser = { emailInput: '', passwordInput: '' } 
     const [formData, setFormData] = useState(emptyUser)
 
@@ -23,7 +24,9 @@ const Signup = () => {
     }
     
     const postNewUser = newUser => {
-        console.log(newUser)
+        Axios.post('/auth/signup', newUser)
+        .then(user => console.log("signup response ", user))
+        .catch(err => console.log(err))
     }
 
     return (
