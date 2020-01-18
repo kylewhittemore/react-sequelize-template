@@ -28,11 +28,11 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // app.use(express.static(path.join(__dirname, 'build')));
 // -app.get('/', function (req, res) {
-app.get('/pages/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+// app.get('/pages/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
-app.use('/api/', routes);
+app.use('/', routes);
 // Sync sequelize models then start Express app
 // =============================================
 db.sequelize.sync({ force: true }).then(() => {

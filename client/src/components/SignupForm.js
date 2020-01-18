@@ -24,7 +24,7 @@ const Signup = props => {
     }
     
     const postNewUser = newUser => {
-        Axios.post('/auth/signup', newUser)
+        Axios.post('/api/auth/signup', newUser)
         .then(user => console.log("signup response ", user))
         .catch(err => console.log(err))
     }
