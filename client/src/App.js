@@ -16,15 +16,15 @@ function App() {
           {/* <Route component={NoMatch} /> */}
 
           <Route 
-            exact path="/" 
+            exact path="/pages/" 
             render={props => <Home {...props} />} 
           />
           <Route 
-            exact path="/login" 
+            exact path="/pages/login" 
             render={props => <Login {...props} />} 
           />
           <Route 
-            exact path="/signup" 
+            exact path="/pages/signup" 
             render={props => <Signup {...props} />}
           />
         </Switch>

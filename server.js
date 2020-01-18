@@ -32,7 +32,7 @@ app.get('/pages/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
-app.use('/', routes);
+app.use('/api/', routes);
 // Sync sequelize models then start Express app
 // =============================================
 db.sequelize.sync({ force: true }).then(() => {
