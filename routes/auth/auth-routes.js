@@ -15,12 +15,14 @@ router.post('/login', passport.authenticate('local'), (req, res) => {
 // otherwise send back an error
 router.post('/signup', (req, res) => {
   db.User.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
   })
     .then((dbResponse) => {
-      // res.redirect(307, '/login');
       res.json(dbResponse);
+      // res.redirect(307, '/login');
     })
     .catch((err) => {
       res.status(401).json(err);
