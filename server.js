@@ -1,8 +1,10 @@
 const express = require('express');
 const session = require('express-session');
 const path = require('path');
-const morgan = require('morgan');
+const logger = require('morgan');
 const passport = require('passport');
+const bodyParser = require('body-parser');
+
 
 const db = require('./models');
 const routes = require('./routes');
@@ -11,9 +13,10 @@ const PORT = process.env.PORT || 8080;
 
 const app = express();
 
-app.use(morgan('dev'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// Morgan Logger middleware
+app.use(logger('dev'));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // We need to use sessions to keep track of our user's login status
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
