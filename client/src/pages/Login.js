@@ -3,6 +3,7 @@ import '../App.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
+import LoginForm from '../components/LoginForm'
 
 function Login() {
   return (
@@ -10,7 +11,7 @@ function Login() {
       <Container className="signup">
         <Row>
           <Col md={{ span:8, offset:2 }}>
-            <h1>login page</h1>
+            <LoginForm />
           </Col>
         </Row>
       </Container>
