@@ -30,13 +30,13 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // -app.get('/', function (req, res) {
 app.use('/api', routes);
 
-app.get('/**', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-});
+// app.get('/**', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+// });
 
 // Sync sequelize models then start Express app
 // =============================================
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync({ force: false }).then(() => {
   app.listen(PORT, () => {
     console.log(`App listening on PORT ${PORT}`);
   });

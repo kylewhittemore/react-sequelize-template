@@ -28,14 +28,14 @@ const LoginForm = props => {
     const login = loginCreds => {
         Axios.post('/api/auth/login', loginCreds)
             .then(user => {
-                console.log("signup response ", user)
+                console.log("login response ", user)
                 setRedirect(true)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        redirect ? <Redirect to={'/home'} />
+        redirect ? <Redirect to={'/'} />
         :
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="emailInput">
