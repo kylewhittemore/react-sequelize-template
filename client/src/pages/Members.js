@@ -6,23 +6,10 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 
-function Members(props) {
-
-    // // const [user, setUser] = useState()
-
-    // useEffect(() => {
-    //     // Axios.get('/api/auth/user_data')
-    //     //     .then(response => {
-    //     //         console.log('user_data: ', response.data)
-    //     //         setUser(response.data)
-    //     //     })
-    //     if (props.isAuth === true)
-    //     {
-    //         console.log("TRUUUUUUUUEEEEE")
-    //     }
-    // }, [])
+const Members = props => {
 
     return (
+        // add context here instead of props.isAuth
         !props.isAuth ? <Redirect to={'/login'} />
             :
             <Container className="signup">
