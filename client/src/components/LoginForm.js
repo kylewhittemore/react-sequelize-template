@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Redirect } from 'react-router-dom'
+import { AuthContext } from '../AuthContext';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios';
 
 const LoginForm = props => {
+
+    const { isAuth, setIsAuth } = useContext(AuthContext)
     const emptyCreds = { emailInput: '', passwordInput: '' }
     const [formData, setFormData] = useState(emptyCreds)
-    const [redirect, setRedirect] = useState(false)
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -29,14 +31,13 @@ const LoginForm = props => {
         Axios.post('/api/auth/login', loginCreds)
             .then(user => {
                 console.log("login response ", user)
-                setRedirect(true)
+                setIsAuth(true)
+                // props.setRedirect(true)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        redirect ? <Redirect to={'/'} />
-        :
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="emailInput">
                 <Form.Label>Email address</Form.Label>

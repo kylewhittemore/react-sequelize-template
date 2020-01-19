@@ -7,7 +7,6 @@ import Axios from 'axios';
 const Signup = props => {
     const emptyUser = { firstNameInput: '', lastNameInput: '', emailInput: '', passwordInput: '' }
     const [formData, setFormData] = useState(emptyUser)
-    const [redirect, setRedirect] = useState(false)
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -31,14 +30,12 @@ const Signup = props => {
         Axios.post('/api/auth/signup', newUser)
             .then(user => {
                 console.log("signup response ", user)
-                setRedirect(true)
+                props.setRedirect(true)
             })
             .catch(err => console.log(err))
     }
 
     return (
-        redirect ? <Redirect to={'/login'} />
-        :
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="inputFirstName">
                 <Form.Label>FirstName</Form.Label>
