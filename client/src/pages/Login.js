@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom'
 import '../App.css';
 import { AuthContext } from '../AuthContext'
@@ -9,8 +9,7 @@ import LoginForm from '../components/LoginForm'
 
 function Login(props) {
 
-  const [redirect, setRedirect] = useState(false)
-  const { isAuth, checkAuth } = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
 
   console.log("login auth: ", isAuth)
 
@@ -20,7 +19,7 @@ function Login(props) {
         <Container className="signup">
           <Row>
             <Col md={{ span: 8, offset: 2 }}>
-              <LoginForm setRedirect={setRedirect} />
+              <LoginForm />
             </Col>
           </Row>
         </Container>

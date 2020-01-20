@@ -1,5 +1,4 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../AuthContext'
+import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import '../App.css';
 import SignupForm from '../components/SignupForm';
@@ -10,8 +9,6 @@ import Col from 'react-bootstrap/Col';
 function Signup() {
 
   const [redirect, setRedirect] = useState(false)
-  const { isAuth } = useContext(AuthContext)
-  console.log("signup auth: ", isAuth)
 
   return (
     redirect ?

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom'
 import '../App.css';
 import Container from 'react-bootstrap/Container'
@@ -8,9 +8,8 @@ import { AuthContext } from '../AuthContext'
 
 function Home() {
   const { isAuth } = useContext(AuthContext)
-
   console.log("home auth: ", isAuth)
-
+  
   return (
     isAuth ?
       <Container className="signup">

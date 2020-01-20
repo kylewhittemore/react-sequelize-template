@@ -22,12 +22,10 @@ router.post('/signup', (req, res) => {
   })
     .then((dbResponse) => {
       res.json(dbResponse);
-      // res.redirect(307, '/login');
     })
     .catch((err) => {
       res.status(401).json(err);
     });
-  // res.json('signup route');
 });
 
 // Route for logging user out

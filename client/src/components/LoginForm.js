@@ -1,5 +1,4 @@
 import React, { useState, useContext } from 'react';
-import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../AuthContext';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
@@ -7,7 +6,7 @@ import Axios from 'axios';
 
 const LoginForm = props => {
 
-    const { isAuth, setIsAuth } = useContext(AuthContext)
+    const { setIsAuth } = useContext(AuthContext)
     const emptyCreds = { emailInput: '', passwordInput: '' }
     const [formData, setFormData] = useState(emptyCreds)
 
@@ -32,7 +31,6 @@ const LoginForm = props => {
             .then(user => {
                 console.log("login response ", user)
                 setIsAuth(true)
-                // props.setRedirect(true)
             })
             .catch(err => console.log(err))
     }

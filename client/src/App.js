@@ -1,16 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Route, Switch, BrowserRouter as Router, Redirect } from 'react-router-dom';
-import Axios from 'axios'
-import './App.css';
+import React from 'react';
+import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './AuthContext'
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Members from './pages/Members';
-import { AuthContext, AuthProvider } from './AuthContext'
-
 
 function App() {
-
   return (
     <Router>
       <Switch>
