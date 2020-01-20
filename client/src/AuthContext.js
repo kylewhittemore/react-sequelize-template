@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Axios from 'axios'
 
-export const AuthContext = React.createContext(false);
+export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isAuth, setIsAuth] = useState(true)
+  const [isAuth, setIsAuth] = useState(false)
 
     useEffect(() => {
         checkAuth()
