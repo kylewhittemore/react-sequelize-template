@@ -8,8 +8,8 @@ import Col from 'react-bootstrap/Col';
 
 const Members = props => {
     const { isAuth } = useContext(AuthContext)
-
     console.log("members auth: ", isAuth)
+
     return (
         isAuth ?
         <Container className="signup">

@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 import Col from 'react-bootstrap/Col';
 import { AuthContext } from '../AuthContext'
 
-function Home() {
+function Home(props) {
   const { isAuth, setIsAuth } = useContext(AuthContext)
   console.log("home auth: ", isAuth)
 
@@ -30,7 +30,12 @@ function Home() {
             <Button onClick={e => {
               e.preventDefault();
               logout();
-            }} />
+            }}>logout</Button>
+            <Button onClick={e => {
+              e.preventDefault();
+              // return <Redirect to='/members' />
+              props.history.push('/members')
+            }}>members</Button>
           </Col>
         </Row>
       </Container>
