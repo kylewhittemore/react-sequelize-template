@@ -36,8 +36,16 @@ app.get('/**', (req, res) => {
 
 // Sync sequelize models then start Express app
 // =============================================
-db.sequelize.sync({ force: false }).then(() => {
-  app.listen(PORT, () => {
-    console.log(`App listening on PORT ${PORT}`);
+db.sequelize.sync({ force: false })
+  .then(() => {
+    console.log('\n*************************************');
+    console.log('MySql database successfully connected');
+    console.log('*************************************\n');
+  })
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log('*************************************');
+      console.log(`     App listening on PORT ${PORT}`);
+      console.log('*************************************\n');
+    });
   });
-});
