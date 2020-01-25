@@ -12,28 +12,18 @@ function Home(props) {
   const { isAuth, setIsAuth } = useContext(AuthContext)
   console.log("home auth: ", isAuth)
 
-  const logout = async () => {
-    Axios.get('/api/auth/logout')
-      .then(response => {
-        console.log("logout response: ", response)
-        setIsAuth(false)
-      })
-      .catch(err => console.log(err));
-  }
-
   return (
     isAuth ?
       <Container className="signup">
         <Row>
           <Col md={{ span: 8, offset: 2 }}>
             <h1>Home Page</h1>
-            <Button onClick={e => {
+            <Button className='m-1' onClick={e => {
               e.preventDefault();
-              logout();
+              props.logout();
             }}>logout</Button>
-            <Button onClick={e => {
+            <Button className='m-1' onClick={e => {
               e.preventDefault();
-              // return <Redirect to='/members' />
               props.history.push('/members')
             }}>members</Button>
           </Col>

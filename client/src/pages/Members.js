@@ -1,10 +1,13 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom'
-import { AuthContext } from '../AuthContext'
+import { AuthContext } from '../AuthContext';
+import { 
+    Button,
+    Col,
+    Container,
+    Row
+} from 'react-bootstrap';
 import '../App.css';
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col';
 
 const Members = props => {
     const { isAuth } = useContext(AuthContext)
@@ -12,15 +15,24 @@ const Members = props => {
 
     return (
         isAuth ?
-        <Container className="signup">
-            <Row>
-                <Col md={{ span: 8, offset: 2 }}>
-                    <h1>Members Page</h1>
-                </Col>
-            </Row>
-        </Container>
-        :
-        <Redirect to='/login'/>
+            <Container className="signup">
+                <Row>
+                    <Col md={{ span: 8, offset: 2 }}>
+                        <h1>Members Page</h1>
+                        <Button className='m-1' onClick={e => {
+                            e.preventDefault();
+                            props.logout();
+                        }}>logout</Button>
+                        <Button className='m-1' onClick={e => {
+                            e.preventDefault();
+                            // return <Redirect to='/members' />
+                            props.history.push('/')
+                        }}>home</Button>
+                    </Col>
+                </Row>
+            </Container>
+            :
+            <Redirect to='/login' />
     );
 }
 

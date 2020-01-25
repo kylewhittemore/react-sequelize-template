@@ -19,7 +19,7 @@ function Login(props) {
         <Container className="signup">
           <Row>
             <Col md={{ span: 8, offset: 2 }}>
-              <LoginForm />
+              <LoginForm {...props}/>
             </Col>
           </Row>
         </Container>
