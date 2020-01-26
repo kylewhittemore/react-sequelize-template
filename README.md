@@ -1,4 +1,4 @@
-# **react-sequelize-template**
+# **Work in Progress: react-sequelize-template**
 
 ## A full-stack application template complete with passport local strategy authentication
 ### **Stack:**
