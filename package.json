@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm install && npm run build && npm run seed"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   "bugs": {
     "url": "https://github.com/kylewhittemore/react-sequelize-template/issues"
   },
-  "homepage": "https://github.com/kylewhittemore/react-sequelize-template#readme",
+  "homepage": "https://github.com/kylewhittemore/react-sequelize-template#readme",  
   "dependencies": {
     "axios": "^0.19.1",
     "bcryptjs": "^2.4.3",
