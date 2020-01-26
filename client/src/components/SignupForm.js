@@ -5,7 +5,14 @@ import Axios from 'axios';
 
 const Signup = props => {
     const emptyUser = { firstNameInput: '', lastNameInput: '', emailInput: '', passwordInput: '' }
+    const errorMessage = 'invalid credentials'
+
     const [formData, setFormData] = useState(emptyUser)
+    const [credsAreInvalid, setCredsAreInvalid] = useState('')
+    const [firstNameColor, setFirstNameColor] = useState('')
+    const [lastNameColor, setLastNameColor] = useState('')
+    const [emailColor, setEmailColor] = useState('')
+    const [passwordColor, setPasswordColor] = useState('')
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -15,14 +22,53 @@ const Signup = props => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
-        const newUser = {
+
+        let newUser = {
             firstName: formData.firstNameInput,
             lastName: formData.lastNameInput,
             email: formData.emailInput,
             password: formData.passwordInput
         }
-        postNewUser(newUser)
-        setFormData(emptyUser)
+        if (validateUserInput(newUser)) {
+            postNewUser(newUser)
+            setFormData(emptyUser)
+        } else {
+            setCredsAreInvalid(errorMessage)
+        }
+    }
+
+    const validateUserInput = ({ firstName, lastName, email, password }) => {
+        let isValid = true;
+
+        if (!firstName) {
+            setFirstNameColor('text-danger')
+            isValid = false;
+        } else {
+            setFirstNameColor('')
+        }
+
+        if (!lastName) {
+            setLastNameColor('text-danger')
+            isValid = false;
+        } else {
+            setLastNameColor('')
+        }
+
+        if (!email) {
+            setEmailColor('text-danger')
+            isValid = false;
+        } else {
+            setEmailColor('')
+        }
+
+        if (!password) {
+            setPasswordColor('text-danger')
+            isValid = false;
+        } else {
+            setPasswordColor('')
+        }
+
+        return isValid;
     }
 
     const postNewUser = newUser => {
@@ -37,23 +83,28 @@ const Signup = props => {
     return (
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="inputFirstName">
-                <Form.Label>FirstName</Form.Label>
+                <Form.Label className={firstNameColor}>FirstName</Form.Label>
                 <Form.Control name="firstNameInput" type="text" placeholder="" value={formData.firstNameInput} onChange={handleInputChange} />
             </Form.Group>
             <Form.Group controlId="inputLastName">
-                <Form.Label>LastName</Form.Label>
+                <Form.Label className={lastNameColor}>LastName</Form.Label>
                 <Form.Control name="lastNameInput" type="text" placeholder="" value={formData.lastNameInput} onChange={handleInputChange} />
             </Form.Group>
             <Form.Group controlId="emailInput">
-                <Form.Label>Email address</Form.Label>
+                <Form.Label className={emailColor}>Email address</Form.Label>
                 <Form.Control name="emailInput" type="email" placeholder="Enter email" value={formData.emailInput} onChange={handleInputChange} />
                 <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                 </Form.Text>
             </Form.Group>
             <Form.Group controlId="inputPassword">
-                <Form.Label>Password</Form.Label>
+                <Form.Label className={passwordColor}>Password</Form.Label>
                 <Form.Control name="passwordInput" type="password" placeholder="Password" value={formData.passwordInput} onChange={handleInputChange} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Text className="text-danger">
+                    {credsAreInvalid}
+                </Form.Text>
             </Form.Group>
             <Form.Group controlId="optionalCheck">
                 <Form.Check type="checkbox" label="Check me out" />

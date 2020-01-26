@@ -26,6 +26,7 @@ function Home(props) {
             <>
               <Button className='m-1' onClick={e => {
                 e.preventDefault();
+                setSecret('not authenticated')
                 props.logout();
               }}>logout</Button>
               <Button className='m-1' onClick={e => {
