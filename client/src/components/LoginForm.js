@@ -58,13 +58,17 @@ const LoginForm = props => {
             <Form.Group controlId="optionalCheck">
                 <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button className='m-1' variant="primary" type="submit">
                 Submit
             </Button>
             <Button className='m-1' onClick={e => {
                 e.preventDefault();
                 props.history.push('/signup')
             }}>signup</Button>
+            <Button className='m-1' onClick={e => {
+                e.preventDefault();
+                props.history.push('/')
+            }}>home</Button>
         </Form>
     )
 }

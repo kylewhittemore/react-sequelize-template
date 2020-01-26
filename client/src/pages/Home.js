@@ -1,36 +1,42 @@
 import React, { useContext } from 'react';
-import { Redirect } from 'react-router-dom'
-import '../App.css';
-import Axios from 'axios'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Button from 'react-bootstrap/Button'
-import Col from 'react-bootstrap/Col';
 import { AuthContext } from '../AuthContext'
+import '../App.css';
+import { Container, Row, Button, Col } from 'react-bootstrap';
 
 function Home(props) {
-  const { isAuth, setIsAuth } = useContext(AuthContext)
+  const { isAuth } = useContext(AuthContext)
   console.log("home auth: ", isAuth)
 
   return (
-    isAuth ?
-      <Container className="signup">
-        <Row>
-          <Col md={{ span: 8, offset: 2 }}>
-            <h1>Home Page</h1>
-            <Button className='m-1' onClick={e => {
-              e.preventDefault();
-              props.logout();
-            }}>logout</Button>
-            <Button className='m-1' onClick={e => {
-              e.preventDefault();
-              props.history.push('/members')
-            }}>members</Button>
+    <Container className="signup">
+      <Row>
+        <Col md={{ span: 8, offset: 2 }}>
+          <h1>Home Page</h1>
+          {isAuth ?
+            <>
+              <Button className='m-1' onClick={e => {
+                e.preventDefault();
+                props.logout();
+              }}>logout</Button>
+              <Button className='m-1' onClick={e => {
+                e.preventDefault();
+                props.history.push('/members')
+              }}>members</Button>
+            </>
+            :
+            <>
+              <Button className='m-1' onClick={e => {
+                e.preventDefault();
+                props.history.push('/login');
+              }}>login</Button>
+              <Button className='m-1' onClick={e => {
+                e.preventDefault();
+                props.history.push('/signup');
+              }}>signup</Button>
+            </>}
           </Col>
-        </Row>
-      </Container>
-      :
-      <Redirect to='/login' />
+      </Row>
+    </Container>
   );
 }
 
