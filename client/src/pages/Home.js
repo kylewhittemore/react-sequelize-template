@@ -28,27 +28,27 @@ function Home(props) {
                 e.preventDefault();
                 setSecret('not authenticated')
                 props.logout();
-              }}>logout</Button>
+              }}>Logout</Button>
               <Button className='m-1' onClick={e => {
                 e.preventDefault();
                 props.history.push('/members')
-              }}>members</Button>
+              }}>Members</Button>
             </>
             :
             <>
               <Button className='m-1' onClick={e => {
                 e.preventDefault();
                 props.history.push('/login');
-              }}>login</Button>
+              }}>Login</Button>
               <Button className='m-1' onClick={e => {
                 e.preventDefault();
                 props.history.push('/signup');
-              }}>signup</Button>
+              }}>Signup</Button>
             </>}
           <Button className='m-1' onClick={e => {
             e.preventDefault();
             getSecret();
-          }}>show secrets</Button>
+          }}>Show Secrets</Button>
         </Col>
       </Row>
       <Row>
