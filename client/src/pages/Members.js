@@ -31,15 +31,15 @@ const Members = props => {
                         <Button className='m-1' onClick={e => {
                             e.preventDefault();
                             props.logout();
-                        }}>logout</Button>
+                        }}>Logout</Button>
                         <Button className='m-1' onClick={e => {
                             e.preventDefault();
                             props.history.push('/')
-                        }}>home</Button>
+                        }}>Home</Button>
                         <Button className='m-1' onClick={e => {
                             e.preventDefault();
                             getSecret();
-                        }}>show secret</Button>
+                        }}>Show Secret</Button>
                     </Col>
                 </Row>
                 <Row>
