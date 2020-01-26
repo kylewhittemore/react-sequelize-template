@@ -1,11 +1,21 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { AuthContext } from '../AuthContext'
 import '../App.css';
 import { Container, Row, Button, Col } from 'react-bootstrap';
+import Axios from 'axios'
+
 
 function Home(props) {
   const { isAuth } = useContext(AuthContext)
   console.log("home auth: ", isAuth)
+
+  const [secret, setSecret] = useState('')
+
+  const getSecret = async () => {
+    const secretResponse = await Axios.get('/api/secrets')
+    console.log(secretResponse.data)
+    setSecret(secretResponse.data)
+  }
 
   return (
     <Container className="signup">
@@ -34,7 +44,14 @@ function Home(props) {
                 props.history.push('/signup');
               }}>signup</Button>
             </>}
-          </Col>
+          <Button className='m-1' onClick={e => {
+            e.preventDefault();
+            getSecret();
+          }}>show secrets</Button>
+        </Col>
+      </Row>
+      <Row>
+        <h1>{secret}</h1>
       </Row>
     </Container>
   );
