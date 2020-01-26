@@ -115,7 +115,7 @@ const Signup = props => {
             <Button className='m-1' onClick={e => {
                 e.preventDefault();
                 props.history.push('/')
-            }}>home</Button>
+            }}>Home</Button>
         </Form>
     )
 }
