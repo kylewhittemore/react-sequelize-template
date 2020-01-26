@@ -8,7 +8,9 @@ const LoginForm = props => {
 
     const { setIsAuth } = useContext(AuthContext)
     const emptyCreds = { emailInput: '', passwordInput: '' }
+    const errorMessage = 'invalid credentials'
     const [formData, setFormData] = useState(emptyCreds)
+    const [credsAreInvalid, setCredsAreInvalid] = useState('')
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -32,7 +34,10 @@ const LoginForm = props => {
                 console.log("login response ", user)
                 setIsAuth(true)
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                setCredsAreInvalid(errorMessage)
+                console.log(err)
+            })
     }
 
     return (
@@ -40,13 +45,15 @@ const LoginForm = props => {
             <Form.Group controlId="emailInput">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control name="emailInput" type="email" placeholder="Enter email" value={formData.emailInput} onChange={handleInputChange} />
-                <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                </Form.Text>
             </Form.Group>
             <Form.Group controlId="inputPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control name="passwordInput" type="password" placeholder="Password" value={formData.passwordInput} onChange={handleInputChange} />
+            </Form.Group>
+            <Form.Group>
+                <Form.Text className="text-danger">
+                    {credsAreInvalid}
+                </Form.Text>
             </Form.Group>
             <Form.Group controlId="optionalCheck">
                 <Form.Check type="checkbox" label="Check me out" />
