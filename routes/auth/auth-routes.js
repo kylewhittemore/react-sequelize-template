@@ -4,8 +4,6 @@ const db = require('../../models');
 const passport = require('../../config/passport');
 
 // Using the passport.authenticate middleware with our local strategy.
-// If the user has valid login credentials, send them to the members page.
-// Otherwise the user will be sent an error
 router.post('/login', passport.authenticate('local'), (req, res) => {
   res.json(req.user);
 });

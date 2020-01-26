@@ -6,7 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
 
-function Signup() {
+function Signup(props) {
 
   const [redirect, setRedirect] = useState(false)
 
@@ -17,7 +17,7 @@ function Signup() {
       <Container className="signup">
         <Row>
           <Col md={{ span: 8, offset: 2 }}>
-            <SignupForm setRedirect={setRedirect} />
+            <SignupForm {...props} setRedirect={setRedirect} />
           </Col>
         </Row>
       </Container>

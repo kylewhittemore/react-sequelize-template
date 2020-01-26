@@ -5,7 +5,6 @@ const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
-
 const db = require('./models');
 const routes = require('./routes');
 
@@ -26,8 +25,6 @@ app.use(passport.session());
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// app.use(express.static(path.join(__dirname, 'build')));
-// -app.get('/', function (req, res) {
 app.use('/api', routes);
 
 app.get('/**', (req, res) => {
