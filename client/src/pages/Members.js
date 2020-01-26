@@ -43,7 +43,9 @@ const Members = props => {
                     </Col>
                 </Row>
                 <Row>
-                    <h1>{secret}</h1>
+                    <Col md={{ span: 8, offset: 2 }}>
+                        <h1>{secret}</h1>
+                    </Col>
                 </Row>
             </Container>
             :
