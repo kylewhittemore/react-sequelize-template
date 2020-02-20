@@ -4,28 +4,34 @@ const path = require('path');
 const logger = require('morgan');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-
 const db = require('./models');
 const routes = require('./routes');
 
+const app = express();
 const PORT = process.env.PORT || 8080;
 
-const app = express();
+// Serve static files from the React app build directory
+app.use(express.static(path.join(__dirname, 'client/build')));
 
+// Express boilerplate middleware
+// =============================================
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
+// Express session middleware
+// =============================================
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
 
+// Routing
+// =============================================
 app.use('/api', routes);
-
-app.get('*', (req, res) => {
+// Everything that is not an api request is sent to index.html
+// for client side routing.
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 

@@ -1,5 +1,4 @@
 const router = require('express').Router();
-// Requiring our models and passport as we've configured it
 const db = require('../../models');
 const passport = require('../../config/passport');
 
@@ -31,7 +30,6 @@ router.post('/signup', (req, res) => {
 router.get('/logout', (req, res) => {
   req.logout();
   res.json('logout successful');
-  // res.redirect('/');
 });
 
 // Route for getting some data about our user to be used client side
@@ -41,7 +39,6 @@ router.get('/user_data', (req, res) => {
     res.json({});
   } else {
     // Otherwise send back the user's email and id
-    // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
       id: req.user.id,
