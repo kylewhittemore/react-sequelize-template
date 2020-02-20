@@ -11,6 +11,7 @@ function Home(props) {
 
   const [secret, setSecret] = useState('')
 
+  // this function is duplicated in the Members page component
   const getSecret = async () => {
     const secretResponse = await Axios.get('/api/secrets')
     console.log(secretResponse.data)

@@ -23,6 +23,9 @@ const Signup = props => {
     const handleFormSubmit = event => {
         event.preventDefault()
 
+        // TODO: investigate handleFormSubmit refactor
+        // Is it necessary to set a static object here just to post the user?
+        // can the formData state be validated and posted directly?
         let newUser = {
             firstName: formData.firstNameInput,
             lastName: formData.lastNameInput,
@@ -37,6 +40,8 @@ const Signup = props => {
         }
     }
 
+    // validateUserInput checks the formData for any missing values and 
+    // then highlights the fields that are invalid
     const validateUserInput = ({ firstName, lastName, email, password }) => {
         let isValid = true;
 

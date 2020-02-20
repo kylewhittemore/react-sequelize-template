@@ -11,11 +11,19 @@ import {
 import '../App.css';
 
 const Members = props => {
+    // Below is a pattern for authenticating the client-side routing
+    // We use the isAuth state provided by AuthContext to conditionally render
+    // the page or Redirect to the login page depending on their login status
+
+    // Destructure the isAuth state from AuthContext
     const { isAuth } = useContext(AuthContext)
     console.log("members auth: ", isAuth)
 
+    // The secret is just something to demonstrate a placeholder authenticated
+    // api route.  
     const [secret, setSecret] = useState('')
 
+    // this function is duplicated in the Home page component
     const getSecret = async () => {
         const secretResponse = await Axios.get('/api/secrets')
         console.log(secretResponse.data)
