@@ -1,55 +1,81 @@
-import React, { useContext, useState } from 'react';
-import { AuthContext } from '../AuthContext'
-import '../App.css';
-import { Container, Row, Button, Col } from 'react-bootstrap';
-import Axios from 'axios'
-
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../AuthContext";
+import "../App.css";
+import { Container, Row, Button, Col } from "react-bootstrap";
+import Axios from "axios";
+import { Redirect } from "react-router-dom";
 
 function Home(props) {
-  const { isAuth } = useContext(AuthContext)
-  console.log("home auth: ", isAuth)
+  const { isAuth } = useContext(AuthContext);
+  console.log("home auth: ", isAuth);
 
-  const [secret, setSecret] = useState('')
+  const [secret, setSecret] = useState("");
 
   // this function is duplicated in the Members page component
   const getSecret = async () => {
-    const secretResponse = await Axios.get('/api/secrets')
-    console.log(secretResponse.data)
-    setSecret(secretResponse.data)
-  }
+    const secretResponse = await Axios.get("/api/secrets");
+    console.log(secretResponse.data);
+    setSecret(secretResponse.data);
+  };
 
   return (
     <Container className="signup">
       <Row>
         <Col md={{ span: 8, offset: 2 }}>
           <h1>Home Page</h1>
-          {isAuth ?
+          {isAuth ? (
             <>
-              <Button className='m-1' onClick={e => {
-                e.preventDefault();
-                setSecret('not authenticated')
-                props.logout();
-              }}>Logout</Button>
-              <Button className='m-1' onClick={e => {
-                e.preventDefault();
-                props.history.push('/members')
-              }}>Members</Button>
+              <Button
+                className="m-1"
+                onClick={e => {
+                  e.preventDefault();
+                  setSecret("not authenticated");
+                  props.logout();
+                }}
+              >
+                Logout
+              </Button>
+              <Button
+                className="m-1"
+                onClick={e => {
+                  e.preventDefault();
+                  props.history.push("/members");
+                }}
+              >
+                Members
+              </Button>
             </>
-            :
+          ) : (
             <>
-              <Button className='m-1' onClick={e => {
-                e.preventDefault();
-                props.history.push('/login');
-              }}>Login</Button>
-              <Button className='m-1' onClick={e => {
-                e.preventDefault();
-                props.history.push('/signup');
-              }}>Signup</Button>
-            </>}
-          <Button className='m-1' onClick={e => {
-            e.preventDefault();
-            getSecret();
-          }}>Show Secrets</Button>
+              <Button
+                className="m-1"
+                onClick={e => {
+                  e.preventDefault();
+                  props.history.push("/login");
+                }}
+              >
+                Login
+              </Button>
+              <Button
+                className="m-1"
+                onClick={e => {
+                  e.preventDefault();
+                  props.history.push("/signup");
+                }}
+              >
+                Signup
+              </Button>
+            </>
+          )}
+          <Button
+            className="m-1"
+            onClick={e => {
+              e.preventDefault();
+              getSecret();
+            }}
+          >
+            Show Secrets
+          </Button>
         </Col>
       </Row>
       <Row>
