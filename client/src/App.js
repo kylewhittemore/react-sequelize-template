@@ -35,6 +35,15 @@ function App() {
       .catch(err => console.log(err));
   };
 
+  // here we are ceating a private route wrapper to prevent front end routing to 
+  // restricted pages.  The ({ component: Component, ...rest })  argument that is
+  // passed to this functional component is essentially the same as just passing 
+  // props, but using object destucturing.  the ...rest is literally the rest of 
+  // the props that were not destructured.  The point is that <Component {...props} />
+  // looks  more conventional and familiar than <props.component {...rest} render=.../>
+  // what is happening here is that the private route component is checking the isAuth 
+  // context, and conditionally rendering whatever component is passed to it or 
+  // a redirect if they are not authenticated.
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -60,6 +69,7 @@ function App() {
         />
         <Route exact path="/login" render={props => <Login {...props} />} />
         <Route exact path="/signup" render={props => <Signup {...props} />} />
+        {/* <PrivateRoute exact path="/members" render={props => <Members {...props} />} /> */}
         <PrivateRoute path="/members" component={Members} />
       </Switch>
     </Router>
@@ -68,7 +78,7 @@ function App() {
 
 // Here we export the final product of our app/context configuration, and
 // even though it is unnamed here, it will be imported as App in index.js
-export default props => {
+export default () => {
   return (
     <AuthProvider>
       <App />

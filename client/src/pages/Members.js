@@ -11,7 +11,7 @@ const Members = props => {
     // the page or Redirect to the login page depending on their login status
 
     // Destructure the isAuth state from AuthContext
-    const { isAuth } = useContext(AuthContext)
+    const { isAuth, logout } = useContext(AuthContext)
     console.log("members auth: ", isAuth)
 
     // The secret is just something to demonstrate a placeholder authenticated
@@ -33,7 +33,7 @@ const Members = props => {
                         <h1>Members Page</h1>
                         <Button className='m-1' onClick={e => {
                             e.preventDefault();
-                            props.logout();
+                            logout();
                             setSecret('not authenticated')
                         }}>Logout</Button>
                         <Button className='m-1' onClick={e => {

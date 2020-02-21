@@ -28,7 +28,7 @@ function Home(props) {
                 className="m-1"
                 onClick={e => {
                   e.preventDefault();
-                  setSecret("not authenticated");
+                  setSecret('');
                   props.logout();
                 }}
               >
