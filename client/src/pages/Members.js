@@ -2,12 +2,7 @@ import React, { useContext, useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { AuthContext } from '../AuthContext';
 import Axios from 'axios'
-import {
-    Button,
-    Col,
-    Container,
-    Row
-} from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import '../App.css';
 
 const Members = props => {
@@ -31,7 +26,7 @@ const Members = props => {
     }
 
     return (
-        isAuth ?
+        // isAuth ?
             <Container className="signup">
                 <Row>
                     <Col md={{ span: 8, offset: 2 }}>
@@ -39,6 +34,7 @@ const Members = props => {
                         <Button className='m-1' onClick={e => {
                             e.preventDefault();
                             props.logout();
+                            setSecret('not authenticated')
                         }}>Logout</Button>
                         <Button className='m-1' onClick={e => {
                             e.preventDefault();
@@ -56,8 +52,8 @@ const Members = props => {
                     </Col>
                 </Row>
             </Container>
-            :
-            <Redirect to='/login' />
+            // :
+            // <Redirect to='/login' />
     );
 }
 

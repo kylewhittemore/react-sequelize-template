@@ -3,7 +3,6 @@ import { AuthContext } from "../AuthContext";
 import "../App.css";
 import { Container, Row, Button, Col } from "react-bootstrap";
 import Axios from "axios";
-import { Redirect } from "react-router-dom";
 
 function Home(props) {
   const { isAuth } = useContext(AuthContext);
