@@ -1,10 +1,5 @@
-import React, { useContext, Component } from "react";
-import {
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  Redirect
-} from "react-router-dom";
+import React, { useContext } from "react";
+import { Route, Switch, BrowserRouter as Router, Redirect } from "react-router-dom";
 import { AuthProvider, AuthContext } from "./AuthContext";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
@@ -22,18 +17,6 @@ function App() {
   // to change their status on logout.
   const { isAuth, setIsAuth } = useContext(AuthContext);
   console.log("App auth: ", isAuth);
-
-  // Logout makes a get request to our backend, where the passport-provided
-  // logout function is called.  we then set isAuth to false so that the user
-  // will no longer be able to view restricted pages
-  const logout = async () => {
-    Axios.get("/api/auth/logout")
-      .then(response => {
-        console.log("logout response: ", response);
-        setIsAuth(false);
-      })
-      .catch(err => console.log(err));
-  };
 
   // here we are ceating a private route wrapper to prevent front end routing to 
   // restricted pages.  The ({ component: Component, ...rest })  argument that is
@@ -65,7 +48,7 @@ function App() {
         <Route
           exact
           path="/"
-          render={props => <Home {...props} logout={logout} />}
+          render={props => <Home {...props} />}
         />
         <Route exact path="/login" render={props => <Login {...props} />} />
         <Route exact path="/signup" render={props => <Signup {...props} />} />

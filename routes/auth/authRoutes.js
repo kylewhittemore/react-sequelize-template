@@ -3,7 +3,10 @@ const db = require('../../models');
 const passport = require('../../config/passport');
 
 // Using the passport.authenticate middleware with our local strategy.
+// passport.authenticate() is a middle ware provided by passport
+// and is configured
 router.post('/login', passport.authenticate('local'), (req, res) => {
+  console.log(req);
   res.json(req.user);
 });
 

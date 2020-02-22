@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Axios from 'axios';
 
 const Signup = props => {
+
     const emptyUser = { firstNameInput: '', lastNameInput: '', emailInput: '', passwordInput: '' }
     const errorMessage = 'invalid credentials'
 
@@ -78,9 +79,8 @@ const Signup = props => {
 
     const postNewUser = newUser => {
         Axios.post('/api/auth/signup', newUser)
-            .then(user => {
-                console.log("signup response ", user)
-                props.setRedirect(true)
+            .then(() => {
+                props.history.push('/login')
             })
             .catch(err => console.log(err))
     }

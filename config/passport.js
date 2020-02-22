@@ -9,6 +9,13 @@ passport.use(new LocalStrategy(
   {
     usernameField: 'email',
   },
+  // this is the function that passport runs when calling
+  // passport.authenticate(), the done() function is built into
+  // passport.  If the user is authenticated, done() will attach
+  // the user to the request object and then call the next function
+  // in the login route: (req, res) => { res.json(req.user) },
+  // and passing the request along with the user attached
+
   ((email, password, done) => {
     // When a user tries to sign in this code runs
     db.User.findOne({
@@ -22,13 +29,15 @@ passport.use(new LocalStrategy(
           message: 'Incorrect email.',
         });
       }
-      // If there is a user with the given email, but the password the user gives us is incorrect
+      // If there is a user with the given email, but the password
+      // the user gives us is incorrect
       if (!dbUser.validPassword(password)) {
         return done(null, false, {
           message: 'Incorrect password.',
         });
       }
-      // If none of the above, return the user
+      // If none of the above, call the done function
+      // and pass the user
       return done(null, dbUser);
     });
   }),

@@ -5,8 +5,8 @@ import { Container, Row, Button, Col } from "react-bootstrap";
 import Axios from "axios";
 
 function Home(props) {
-  const { isAuth } = useContext(AuthContext);
-  console.log("home auth: ", isAuth);
+  
+  const { isAuth, logout } = useContext(AuthContext);
 
   const [secret, setSecret] = useState("");
 
@@ -29,7 +29,7 @@ function Home(props) {
                 onClick={e => {
                   e.preventDefault();
                   setSecret('');
-                  props.logout();
+                  logout();
                 }}
               >
                 Logout
