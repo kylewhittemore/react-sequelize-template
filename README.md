@@ -1,4 +1,4 @@
-# **Work in Progress: react-sequelize-template**
+# **React-Sequelize with Passport Authentication**
 
 ## A full-stack application template complete with passport local strategy authentication
 ### **Stack:**
@@ -19,5 +19,7 @@
     <br/>       `DB_HOST=127.0.0.1`
     <br/>       `DB_USER=root`
     <br/>       `DB_NAME=yourDBname`
-* run &nbsp; `npm start` to start the server with nodemon which will automatically refresh after any server-side code changes
 
+* In development, the server and client are started separately.
+* run &nbsp; `npm start` in the root of the project to start the server
+* run &nbsp; `npm start` in the root of the client folder to start the client
