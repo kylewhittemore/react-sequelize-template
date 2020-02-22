@@ -32,7 +32,7 @@ app.use('/api', routes);
 
 // Everything that is not an api request is sent to index.html
 // for client side routing.
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 
