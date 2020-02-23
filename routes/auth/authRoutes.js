@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('../../models');
 const passport = require('../../config/passport');
+const userUtil = require('../../utils/userUtil');
 
 // Using the passport.authenticate middleware with our local strategy.
 // passport.authenticate() is a middle ware provided by passport
@@ -20,18 +21,16 @@ router.post('/signup', (req, res) => {
     lastName: req.body.lastName,
     email: req.body.email,
     password: req.body.password,
-    varificationCode: '',
     isVerified: false,
-    // add verification code to user model so we can check against it
-    // add isVerified field so that the user can be restricted from logging in
-    // until they verify their email
   })
-    .then((dbResponse) => {
-      // TODO: sendMail function of some sort
-      // send verification email with the user's verification code
-      // the user will be given a link to return to the site and enter
-      // the code.
-      res.json(dbResponse);
+    .then((dbUser) => {
+      const vCodeRaw = userUtil.getVerificationCode();
+      db.VerificationCode.create({
+        UserId: dbUser.id,
+        email: dbUser.email,
+        code: vCodeRaw,
+      })
+        .then((dbVerificationCode) => res.json(dbVerificationCode));
     })
     .catch((err) => {
       res.json(err);

@@ -10,7 +10,7 @@ module.exports = function (sequelize, DataTypes) {
         isEmail: true,
       },
     },
-    verificationCode: {
+    code: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -26,15 +26,13 @@ module.exports = function (sequelize, DataTypes) {
 
   // Creating a custom method for our User model. This will check if an unhashed
   // password entered by the user can be compared to the hashed password stored in our database
-  VerificationCode.prototype.validCode = function (verificationCode) {
-    return bcrypt.compareSync(verificationCode, this.verificationCode);
+  VerificationCode.prototype.isValidCode = function (code) {
+    return bcrypt.compareSync(code.toString(), this.code);
   };
 
-  // Hooks are automatic methods that run during various phases of the User Model lifecycle
-  // In this case, before a User is created, we will automatically hash their password
   VerificationCode.addHook('beforeCreate', (verificationCode) => {
-    verificationCode.verificationCode = bcrypt.hashSync(
-      verificationCode.verificationCode,
+    verificationCode.code = bcrypt.hashSync(
+      verificationCode.code.toString(),
       bcrypt.genSaltSync(10),
       null,
     );
