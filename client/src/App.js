@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Members from "./pages/Members";
-import Axios from "axios";
 
 // Even though this is the App.js file, in the end we are not exactly exporting
 // the App component.  We actually set up the app component to implement our react
@@ -22,11 +21,7 @@ function App() {
   // restricted pages.  The ({ component: Component, ...rest })  argument that is
   // passed to this functional component is essentially the same as just passing 
   // props, but using object destucturing.  the ...rest is literally the rest of 
-  // the props that were not destructured.  The point is that <Component {...props} />
-  // looks  more conventional and familiar than <props.component {...rest} render=.../>
-  // what is happening here is that the private route component is checking the isAuth 
-  // context, and conditionally rendering whatever component is passed to it or 
-  // a redirect if they are not authenticated.
+  // the props that were not destructured. 
   const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
@@ -37,12 +32,6 @@ function App() {
   );
 
   return (
-    // when setting up the router, we pass the spread props to to each
-    // component so that they can access props.history.  we use
-    // props.history.push('path here) to send a user to a new page, but
-    // in a way that still allows them to use the forward and back buttons
-    // When the user logs out however, we redirect so that they cannot
-    // press the back button to re-access restricted content.
     <Router>
       <Switch>
         <Route
@@ -52,8 +41,7 @@ function App() {
         />
         <Route exact path="/login" render={props => <Login {...props} />} />
         <Route exact path="/signup" render={props => <Signup {...props} />} />
-        {/* <PrivateRoute exact path="/members" render={props => <Members {...props} />} /> */}
-        <PrivateRoute path="/members" component={Members} />
+        <PrivateRoute exact path="/members" component={Members} />
       </Switch>
     </Router>
   );

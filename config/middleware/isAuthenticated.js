@@ -3,7 +3,7 @@
 // This is middleware for restricting routes a user is not allowed to visit if not logged in
 // For example:
 //    router.get('/secrets', isAuthenticated, (req, res) => {
-//      res.json('Talk is cheap. Show me the code. -Linus Torvalds 5/2/2000');
+//      res.json('Talk is cheap. Show me the code. -Linus Torvalds');
 //    });
 // The middleware can be applied to specific routes. For our purposes, since we are using React
 // which is a single page application, we only need to use this middleware on api routes.

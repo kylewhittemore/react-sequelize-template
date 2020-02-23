@@ -15,10 +15,8 @@ export const AuthProvider = ({ children }) => {
         Axios.get('api/auth/user_data')
             .then(response => {
                 if (response.data.email) {
-                    console.log('checkAuth true: ', response.data)
                     setIsAuth(true)
                 } else {
-                    console.log('checkAuth false: ', response.data)
                     setIsAuth(false)
                 }
             })
@@ -26,8 +24,7 @@ export const AuthProvider = ({ children }) => {
 
     const logout = async () => {
         Axios.get("/api/auth/logout")
-          .then(response => {
-            console.log("logout response: ", response);
+          .then(() => {
             setIsAuth(false);
             return <Redirect to='/' />
           })

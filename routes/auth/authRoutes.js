@@ -25,7 +25,7 @@ router.post('/signup', (req, res) => {
       res.json(dbResponse);
     })
     .catch((err) => {
-      res.status(401).json(err);
+      res.json(err);
     });
 });
 
