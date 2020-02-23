@@ -3,11 +3,13 @@ import { AuthContext } from '../AuthContext';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 const VerifyEmailForm = () => {
     const emptyForm = { code: '', email: '' }
     const [formData, setFormData] = useState(emptyForm)
     const [codeIsInvalid, setCodeIsInvalid] = useState(false)
+    const [redirect, setRedirect] = useState(false)
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -22,12 +24,21 @@ const VerifyEmailForm = () => {
         } 
         Axios
         .post(`/api/auth/verify/${formData.code}`, emailUsr)
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response)
+            if (response.data !== 'updated user') {
+                setCodeIsInvalid(true)
+                return
+            }
+            setRedirect(true)
+        })
         .catch(error => console.log(error))
         setFormData(emptyForm)
     }
 
     return (
+        redirect ? <Redirect to='/' />
+        :
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="emailInput">
                 <Form.Label>Email address</Form.Label>

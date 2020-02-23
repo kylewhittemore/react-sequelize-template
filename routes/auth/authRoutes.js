@@ -56,7 +56,7 @@ router.post('/verify/:code', (req, res) => {
         }).then((dbUser) => {
           dbUser.update({
             isVerified: true,
-          }).then(() => res.json('updated user'));
+          }).then(() => res.status(200).json('updated user'));
         }).catch((err) => res.json(err));
       } else {
         res.json('incorrect code');
