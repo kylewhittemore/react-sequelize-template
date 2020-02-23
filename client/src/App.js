@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Members from "./pages/Members";
+import VerifyEmail from './pages/VerifyEmail'
 
 // Even though this is the App.js file, in the end we are not exactly exporting
 // the App component.  We actually set up the app component to implement our react
@@ -41,6 +42,7 @@ function App() {
         />
         <Route exact path="/login" render={props => <Login {...props} />} />
         <Route exact path="/signup" render={props => <Signup {...props} />} />
+        <Route exact path="/verify" render={props => <VerifyEmail {...props} />} />
         <PrivateRoute exact path="/members" component={Members} />
       </Switch>
     </Router>

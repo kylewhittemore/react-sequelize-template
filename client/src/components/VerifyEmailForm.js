@@ -4,11 +4,10 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
 import Axios from 'axios';
 
-const VerifyEmailForm = props => {
-
-    const { setIsAuth } = useContext(AuthContext)
-    const errorMessage = 'invalid code'
-    const [formData, setFormData] = useState({ code: '', email: '' })
+const VerifyEmailForm = () => {
+    const emptyForm = { code: '', email: '' }
+    const [formData, setFormData] = useState(emptyForm)
+    const [codeIsInvalid, setCodeIsInvalid] = useState(false)
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -18,51 +17,37 @@ const VerifyEmailForm = props => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
-        const inputCreds = {
-            code: formData.code
-        }
-        login(inputCreds)
-        setFormData(emptyCreds)
-    }
-
-    const login = loginCreds => {
-        Axios.post('/api/auth/login', loginCreds)
-            .then(user => {
-                console.log("login response ", user)
-                setIsAuth(true)
-            })
-            .catch(err => {
-                setCredsAreInvalid(errorMessage)
-                console.log(err)
-            })
+        const emailUsr = {
+            email: formData.email
+        } 
+        Axios
+        .post(`/api/auth/verify/${formData.code}`, emailUsr)
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+        setFormData(emptyForm)
     }
 
     return (
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="emailInput">
                 <Form.Label>Email address</Form.Label>
-                <Form.Control name="emailInput" type="email" placeholder="Enter email" value={formData.emailInput} onChange={handleInputChange} />
+                <Form.Control name="email" type="email" placeholder="Enter email" value={formData.email} onChange={handleInputChange} />
+                <Form.Text className="text-muted">
+                    We'll never share your email with anyone else.
+                </Form.Text>
             </Form.Group>
-            <Form.Group controlId="inputPassword">
-                <Form.Label>Password</Form.Label>
-                <Form.Control name="passwordInput" type="password" placeholder="Password" value={formData.passwordInput} onChange={handleInputChange} />
+            <Form.Group controlId="codeInput">
+                <Form.Label>Enter you verification code</Form.Label>
+                <Form.Control name="code" type="text" placeholder="code" value={formData.code} onChange={handleInputChange} />
             </Form.Group>
             <Form.Group>
                 <Form.Text className="text-danger">
-                    {credsAreInvalid}
+                    {codeIsInvalid}
                 </Form.Text>
             </Form.Group>
             <Button className='m-1' variant="primary" type="submit">
                 Submit
             </Button>
-            <Button className='m-1' onClick={e => {
-                e.preventDefault();
-                props.history.push('/signup')
-            }}>Signup</Button>
-            <Button className='m-1' onClick={e => {
-                e.preventDefault();
-                props.history.push('/')
-            }}>Home</Button>
         </Form>
     )
 }

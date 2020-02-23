@@ -80,6 +80,8 @@ router.get('/user_data', (req, res) => {
     res.json({
       email: req.user.email,
       id: req.user.id,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
     });
   }
 });

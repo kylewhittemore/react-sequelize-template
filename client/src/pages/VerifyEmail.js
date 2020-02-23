@@ -5,13 +5,11 @@ import { AuthContext } from '../AuthContext'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col';
-import LoginForm from '../components/LoginForm'
+import VerifyEmailForm from '../components/VerifyEmailForm';
 
 function Login(props) {
 
   const { isAuth } = useContext(AuthContext)
-
-  console.log("login auth: ", isAuth)
 
   return (
       isAuth ? <Redirect to='/' />
@@ -19,7 +17,7 @@ function Login(props) {
         <Container className="signup">
           <Row>
             <Col md={{ span: 8, offset: 2 }}>
-              
+              <VerifyEmailForm />
             </Col>
           </Row>
         </Container>
