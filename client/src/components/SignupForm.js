@@ -5,7 +5,7 @@ import Axios from 'axios';
 
 const Signup = props => {
 
-    const emptyUser = { firstNameInput: '', lastNameInput: '', emailInput: '', passwordInput: '' }
+    const emptyUser = { firstNameInput: '', lastNameInput: '', emailInput: '', passwordInput: '', passwordConfirmInput: '' }
     const errorMessage = 'invalid credentials'
 
     const [formData, setFormData] = useState(emptyUser)
@@ -14,6 +14,7 @@ const Signup = props => {
     const [lastNameColor, setLastNameColor] = useState('')
     const [emailColor, setEmailColor] = useState('')
     const [passwordColor, setPasswordColor] = useState('')
+    const [passwordConfirmColor, setPasswordConfirmColor] = useState('')
 
     const handleInputChange = event => {
         event.preventDefault()
@@ -31,7 +32,8 @@ const Signup = props => {
             firstName: formData.firstNameInput,
             lastName: formData.lastNameInput,
             email: formData.emailInput,
-            password: formData.passwordInput
+            password: formData.passwordInput,
+            passwordConfirm: formData.passwordConfirmInput,
         }
         if (validateUserInput(newUser)) {
             postNewUser(newUser)
@@ -43,7 +45,7 @@ const Signup = props => {
 
     // validateUserInput checks the formData for any missing values and 
     // then highlights the fields that are invalid
-    const validateUserInput = ({ firstName, lastName, email, password }) => {
+    const validateUserInput = ({ firstName, lastName, email, password, passwordConfirm }) => {
         let isValid = true;
 
         if (!firstName) {
@@ -72,6 +74,13 @@ const Signup = props => {
             isValid = false;
         } else {
             setPasswordColor('')
+        }
+
+        if (password !== passwordConfirm) {
+            setPasswordConfirmColor('text-danger')
+            isValid = false;
+        } else {
+            setPasswordConfirmColor('')
         }
 
         return isValid;
@@ -105,6 +114,10 @@ const Signup = props => {
             <Form.Group controlId="inputPassword">
                 <Form.Label className={passwordColor}>Password</Form.Label>
                 <Form.Control name="passwordInput" type="password" placeholder="Password" value={formData.passwordInput} onChange={handleInputChange} />
+            </Form.Group>
+            <Form.Group controlId="inputPasswordConfirm">
+                <Form.Label className={passwordColor}>Confirm Password</Form.Label>
+                <Form.Control name="passwordConfirmInput" type="password" placeholder="Confirm Password" value={formData.passwordConfirmInput} onChange={handleInputChange} />
             </Form.Group>
             <Form.Group>
                 <Form.Text className="text-danger">
