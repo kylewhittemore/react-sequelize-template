@@ -58,6 +58,8 @@ router.post('/verify/:code', (req, res) => {
             isVerified: true,
           }).then(() => res.json('updated user'));
         }).catch((err) => res.json(err));
+      } else {
+        res.json('incorrect code');
       }
     });
 });
