@@ -37,7 +37,7 @@ const VerifyEmailForm = () => {
     }
 
     return (
-        redirect ? <Redirect to='/' />
+        redirect ? <Redirect to='/login' />
         :
         <Form onSubmit={handleFormSubmit}>
             <Form.Group controlId="emailInput">

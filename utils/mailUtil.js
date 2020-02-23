@@ -14,7 +14,8 @@ const mailUtil = {
       from: 'sender@appname.com',
       to: email,
       subject: 'Sending Email using Node.js',
-      text: code,
+      text: `${code}\n`,
+      html: `<p>${code}</p><p><a href="http://localhost:3000/verify">Verify email</a></p>`,
     };
 
     transport.sendMail(mailOptions, (error, info) => {

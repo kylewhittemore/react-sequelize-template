@@ -6,7 +6,7 @@ import Axios from 'axios';
 const Signup = props => {
 
     const emptyUser = { firstNameInput: '', lastNameInput: '', emailInput: '', passwordInput: '', passwordConfirmInput: '' }
-    const errorMessage = 'invalid credentials'
+    const errorMessage = 'invalid or incomplete information'
 
     const [formData, setFormData] = useState(emptyUser)
     const [credsAreInvalid, setCredsAreInvalid] = useState('')
@@ -71,13 +71,15 @@ const Signup = props => {
 
         if (!password) {
             setPasswordColor('text-danger')
+            setFormData({ ...formData, passwordInput: '', passwordConfirmInput: '', })
             isValid = false;
         } else {
             setPasswordColor('')
         }
-
+        
         if (password !== passwordConfirm) {
             setPasswordConfirmColor('text-danger')
+            setFormData({ ...formData, passwordInput: '', passwordConfirmInput: '', })
             isValid = false;
         } else {
             setPasswordConfirmColor('')
