@@ -49,7 +49,15 @@ router.post('/verify/:code', (req, res) => {
   })
     .then((dbVerificationCode) => {
       if (dbVerificationCode.validateCode(req.params.code, req.body.email)) {
-        res.json('verified email');
+        db.User.findOne({
+          where: {
+            email: req.body.email,
+          },
+        }).then((dbUser) => {
+          dbUser.update({
+            isVerified: true,
+          }).then(() => res.json('updated user'));
+        }).catch((err) => res.json(err));
       }
     });
 });

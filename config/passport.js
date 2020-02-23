@@ -36,6 +36,11 @@ passport.use(new LocalStrategy(
           message: 'Incorrect password.',
         });
       }
+      if (!dbUser.isVerified) {
+        return done(null, false, {
+          message: 'Please verify your email',
+        });
+      }
       // If none of the above, call the done function
       // and pass the user
       return done(null, dbUser);
