@@ -26,8 +26,9 @@ module.exports = function (sequelize, DataTypes) {
 
   // Creating a custom method for our User model. This will check if an unhashed
   // password entered by the user can be compared to the hashed password stored in our database
-  VerificationCode.prototype.isValidCode = function (code) {
-    return bcrypt.compareSync(code.toString(), this.code);
+  VerificationCode.prototype.validateCode = function (code, email) {
+    console.log(code, email);
+    return bcrypt.compareSync(code, this.code) && email === this.email;
   };
 
   VerificationCode.addHook('beforeCreate', (verificationCode) => {

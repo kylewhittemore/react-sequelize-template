@@ -8,18 +8,23 @@ const transport = nodemailer.createTransport({
     pass: 'ab21482d769203',
   },
 });
+const mailUtil = {
+  sendCode(code, email) {
+    const mailOptions = {
+      from: 'sender@appname.com',
+      to: email,
+      subject: 'Sending Email using Node.js',
+      text: code,
+    };
 
-const mailOptions = {
-  from: 'sender@appname.com',
-  to: 'recipient@customer.com',
-  subject: 'Sending Email using Node.js',
-  text: 'That was easy!',
+    transport.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log(`Email sent: ${info.response}`);
+      }
+    });
+  },
 };
 
-transport.sendMail(mailOptions, (error, info) => {
-  if (error) {
-    console.log(error);
-  } else {
-    console.log(`Email sent: ${info.response}`);
-  }
-});
+module.exports = mailUtil;

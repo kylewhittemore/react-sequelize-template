@@ -15,7 +15,7 @@ const authMiddleware = (req, res, next) => {
   // Next() is the third argument in the GET route in the comments above. It is basically
   // the part of the route you would have written even if you werent using middleware.
   // In this case next() === (req, res) => { res.json('something to say') }
-  if (req.isAuthenticated()) {
+  if (req.isAuthenticated() && req.user.isVerified) {
     return next();
   }
   // if the user is not logged in, return a 401 with message, the client will route the

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../../models');
 const passport = require('../../config/passport');
 const userUtil = require('../../utils/userUtil');
+const mailUtil = require('../../utils/mailUtil');
 
 // Using the passport.authenticate middleware with our local strategy.
 // passport.authenticate() is a middle ware provided by passport
@@ -30,10 +31,26 @@ router.post('/signup', (req, res) => {
         email: dbUser.email,
         code: vCodeRaw,
       })
-        .then((dbVerificationCode) => res.json(dbVerificationCode));
+        .then((dbVerificationCode) => {
+          mailUtil.sendCode(vCodeRaw.toString(), dbVerificationCode.email);
+          res.json(dbVerificationCode);
+        });
     })
     .catch((err) => {
       res.json(err);
+    });
+});
+
+router.post('/verify/:code', (req, res) => {
+  db.VerificationCode.findOne({
+    where: {
+      email: req.body.email,
+    },
+  })
+    .then((dbVerificationCode) => {
+      if (dbVerificationCode.validateCode(req.params.code, req.body.email)) {
+        res.json('verified email');
+      }
     });
 });
 
