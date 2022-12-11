@@ -25,7 +25,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-session": "^1.17.0",
     "morgan": "^1.9.1",
     "mysql2": "^2.1.0",
